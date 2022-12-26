@@ -11,10 +11,11 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
-  //run everytime since there are no dependencies
+  //run everytime since there are no dependencies --[]
+  //will run only first time if dependencies is defined ---[]
   useEffect(()=>{
     console.log("EFFECT RUNNING");
-  });
+  },[]);
 
   useEffect(() => {
     const identifier = setTimeout(()=>{
