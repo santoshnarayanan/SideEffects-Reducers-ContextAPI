@@ -15,6 +15,10 @@ const Login = (props) => {
   //will run only first time if dependencies is defined ---[]
   useEffect(()=>{
     console.log("EFFECT RUNNING");
+
+    return(()=>{
+      console.log("EFFECT CLEANUP");
+    });
   },[]);
 
   useEffect(() => {
