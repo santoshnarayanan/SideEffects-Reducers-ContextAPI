@@ -56,28 +56,30 @@ const Login = (props) => {
 
   //run everytime since there are no dependencies --[]
   //will run only first time if dependencies is defined ---[]
-  useEffect(() => {
+  /*useEffect(() => {
     console.log("EFFECT RUNNING");
 
     return (() => {
       console.log("EFFECT CLEANUP");
     });
-  });
+  });*/
 
-  // useEffect(() => {
-  //   const identifier = setTimeout(()=>{
-  //     console.log("Checking form validity");
-  //     setFormIsValid(
-  //       enteredEmail.includes('@') && enteredPassword.trim().length > 6
-  //     );
-  //   },500);
+  //Alias assignment
+  const {isValid:emailIsValid} = emailState;
+  const {isValid:passwordIsValid} = passwordState;
 
-  //cleanup process
-  //   return () => {
-  //     console.log("CLEANUP PROCESS");
-  //     clearTimeout(identifier);
-  //   };
-  // }, [enteredEmail, enteredPassword]);
+  useEffect(() => {
+    const identifier = setTimeout(()=>{
+      console.log("Checking form validity");
+      setFormIsValid(emailIsValid && passwordIsValid);
+    },500);
+
+    //cleanup process
+    return () => {
+      console.log("CLEANUP PROCESS");
+      clearTimeout(identifier);
+    };
+  }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: 'USER_INPUT', val: event.target.value });
@@ -90,9 +92,9 @@ const Login = (props) => {
   const passwordChangeHandler = (event) => {
     dispatchPassword({ type: 'USER_INPUT', val: event.target.value });
 
-    setFormIsValid(
-      emailState.isValid && event.target.value.trim().length > 6
-    );
+    // setFormIsValid(
+    //   emailState.isValid && event.target.value.trim().length > 6
+    // );
   };
 
   const validateEmailHandler = () => {
